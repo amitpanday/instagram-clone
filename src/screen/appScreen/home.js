@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, FlatList, Dimensions, TouchableOpacity, ScrollView, SectionList } from 'react-native';
+import { View, Text, Image, FlatList, Dimensions, TouchableOpacity, ScrollView, SectionList, SafeAreaView } from 'react-native';
+import Modal from 'react-native-modal';
 
 import Header from '../../component/header';
 import Card from '../../component/card';
@@ -18,8 +19,12 @@ class Home extends Component {
         super(props);
         this.state = {
             data: [],
-            loaderVisible: false
+            selectedStories: {},
+            storiesModal: false,
+            loaderVisible: false,
+            scrollOffset: null,
         }
+        this.scrollViewRef = React.createRef();
     }
 
     componentDidMount() {
@@ -30,7 +35,38 @@ class Home extends Component {
 
     handleStoriesPress = (data) => {
         console.log('handleStoriesPress =>', data);
+        this.props.navigation.navigate('ShowStories');
+        // this.setState({ storiesModal: true, selectedStories: data });
     }
+
+    onSwipeComplete = ({ swipingDirection }) => {
+        switch (swipingDirection) {
+            case 'left':
+                console.log(swipingDirection);
+                break;
+            case 'up':
+                console.log(swipingDirection);
+                break;
+            case 'right':
+                console.log(swipingDirection);
+                break;
+            default:
+                this.setState({ storiesModal: false })
+                break;
+        }
+    }
+
+
+    handleOnScroll = event => {
+        this.setState({
+            scrollOffset: event.nativeEvent.contentOffset.y,
+        });
+    };
+    handleScrollTo = p => {
+        if (this.scrollViewRef.current) {
+            this.scrollViewRef.current.scrollTo(p);
+        }
+    };
 
     render() {
         return (
@@ -72,6 +108,38 @@ class Home extends Component {
                         )}
                     />
                 </View>
+                {/* <Modal
+                    testID={'modal'}
+                    backdropOpacity={1}
+                    swipeDirection={['up', 'down', 'left', 'right']}
+                    isVisible={this.state.storiesModal}
+                    deviceHeight={height}
+                    deviceWidth={width}
+                    useNativeDriver={true}
+                    propagateSwipe={true}
+                    useNativeDriverForBackdrop={true}
+                    scrollHorizontal={true}
+                    style={{ flex: 1 }}
+                    onBackButtonPress={() => this.setState({ storiesModal: false })}
+                    onSwipeComplete={this.onSwipeComplete}
+                >
+                    <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#000000' }}>
+                        <FlatList
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            data={[{}, {}]}
+                            extraData={this.state}
+                            keyExtractor={(item, index) => (item + index)}
+                            renderItem={({ item, index }) => (
+                                <Image
+                                    resizeMode="contain"
+                                    style={{ flex: 1, width: width, height: 50 }}
+                                    source={{ uri: this.state.selectedStories.source }}
+                                />
+                            )}
+                        />
+                    </View>
+                </Modal> */}
             </View>
         );
     }
