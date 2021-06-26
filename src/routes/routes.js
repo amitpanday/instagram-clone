@@ -14,6 +14,7 @@ import Profile from '../screen/appScreen/profile';
 
 // Main stack Navigator
 import ShowStories from '../screen/appScreen/showStories';
+import UploadFiles from '../screen/appScreen/uploadFile';
 
 const TabNavigator = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -112,6 +113,7 @@ function RootStackScreen() {
         <RootStack.Navigator initialRouteName={TabNavigatorScreen} screenOptions={{ headerShown: false }}>
             <RootStack.Screen name="TabNavigation" component={TabNavigatorScreen} />
             <RootStack.Screen name="ShowStories" component={ShowStories} />
+            <RootStack.Screen name="UploadFiles" component={UploadFiles} />
         </RootStack.Navigator>
     );
 }

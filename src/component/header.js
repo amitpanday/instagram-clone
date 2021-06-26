@@ -6,7 +6,7 @@ export default Header = ({ navigation }) => {
     return (
         <View style={{ flexDirection: 'row', height: 50, justifyContent: 'space-around', alignContent: 'center', alignItems: 'center', borderBottomColor: '#ddd', borderBottomWidth: 0.3 }}>
             <View style={{ flex: 1, height: 50, justifyContent: 'center', padding: 10 }}>
-                <TouchableOpacity style={{ width: 40, height: 40 }}>
+                <TouchableOpacity onPress={() => navigation.navigate('UploadFiles')} style={{ width: 40, height: 40 }}>
                     <Image
                         resizeMode={'contain'}
                         style={{ width: 40, height: 40 }}
@@ -19,7 +19,7 @@ export default Header = ({ navigation }) => {
                 {/* <Text style={{ fontSize: 20, color: '#000000', fontWeight: '600', fontStyle: 'italic', textTransform: 'uppercase' }}>Instagram</Text> */}
             </View>
             <View style={{ flex: 1, height: 50, justifyContent: 'center', padding: 10, alignItems: 'flex-end' }}>
-                <TouchableOpacity style={{ width: 35, height: 35 }}>
+                <TouchableOpacity onPress={() => console.log('message')} style={{ width: 35, height: 35 }}>
                     <Image
                         resizeMode={'contain'}
                         style={{ width: 35, height: 35 }}
